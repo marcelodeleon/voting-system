@@ -1,5 +1,5 @@
 {
-  "name": "test",
+  "name": "voting-system",
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
@@ -25,7 +25,12 @@
     "build": "yarn build:front",
     "build:front": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint ."
+  },
+  "engines": {
+    "node": "14.13.1",
+    "yarn": "1.22.4"
   },
   "browserslist": {
     "production": [
@@ -38,5 +43,14 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": "eslint --cache --fix",
+    "*.js": "prettier --write"
   }
 }
