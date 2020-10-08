@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Vote from './components/users/Vote';
 import Election from './components/admin/Election';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 function App() {
   return (
