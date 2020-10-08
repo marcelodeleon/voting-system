@@ -36,3 +36,31 @@
     transform: rotate(360deg);
   }
 }
+.modal-container{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.75)
+}
+.modal {
+  font-size: 20px;
+  color: rgb(0, 28, 104);
+  font-family: Arial Black;
+  position: absolute;
+  top: 130px;
+  left: 190px;
+  right: 190px;
+  bottom: 130px;
+  border: 5px solid rgba(0, 19, 48, 0.74);
+  background: #fff;
+  overflow: auto;
+  text-align: center;
+  background-color: rgba(132, 171, 255, 0.562)
+}
+.my-form {
+  text-align:auto;
+  font-size: 20px;
+  font-family: Arial Black;
+}
