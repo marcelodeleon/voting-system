@@ -5,7 +5,7 @@ const { mongodb } = require('../libs/connectors');
 const mongodbUri = process.env.MONGODB_URI;
 
 exports.handler = async (event, context, callback) => {
-  await mongodb(mongodbUri);
+  await await mongodb(mongodbUri);
 
   const election = new Election({
     name: 'TestN',

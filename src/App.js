@@ -2,16 +2,18 @@ import React from 'react';
 import './App.css';
 import Vote from './components/users/Vote';
 import Election from './components/admin/Election';
-import { BrowserRouter, Route } from 'react-router-dom';
+import ModalProposal from './components/admin/ModalProposal';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 function App() {
   return (
-    <switch>
-      <BrowserRouter>
+    <BrowserRouter>
+      <Switch>
         <Route exact path="/vote" component={Vote} />
+        <Route exact path="/admin/pruebaModal" component={ModalProposal} />
         <Route exact path="/admin/election" component={Election} />
-      </BrowserRouter>
-    </switch>
+      </Switch>
+    </BrowserRouter>
   );
 }
 
