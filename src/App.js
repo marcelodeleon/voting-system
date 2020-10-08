@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Vote from './components/users/Vote';
 import Election from './components/admin/Election';
