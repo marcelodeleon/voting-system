@@ -1,5 +1,4 @@
 import React from 'react';
-//import CandidateList from '../../components/CandidateList';
 import Navbar from '../Navbar';
 import '../styles/Vote.css';
 
