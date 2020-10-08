@@ -1,5 +1,6 @@
 import React from 'react';
 import CandidateList from '../../components/CandidateList';
+import Navbar from '../Navbar';
 import { Link } from 'react-router-dom';
 
 class Vote extends React.Component {
@@ -42,15 +43,18 @@ class Vote extends React.Component {
     // }
     return (
       <div>
+        <Navbar />
         <CandidateList candidates={this.state.data} />
-        <a
-          className="App-link"
-          href="http://localhost:8888/.netlify/functions/hello"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Votar
-        </a>
+        <div>
+          <a
+            className="App-link"
+            href="http://localhost:8888/.netlify/functions/hello"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Votar
+          </a>
+        </div>
       </div>
     );
   }
