@@ -1,7 +1,6 @@
 import React from 'react';
 import CandidateList from '../../components/CandidateList';
 import Navbar from '../Navbar';
-import { Link } from 'react-router-dom';
 
 class Vote extends React.Component {
   state = {
