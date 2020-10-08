@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 
 class Vote extends React.Component {
   state = {
+    loding: true,
+    error: null,
     data: [
       {
         id: '1',
@@ -16,13 +18,39 @@ class Vote extends React.Component {
       },
     ],
   };
+
+  // componentDidMount(){
+  //   this.fetchData();
+  // }
+
+  // fetchData = () => {
+  // this.setState({loading: true, error: null});
+
+  // try{
+  //   const data = [];
+  //   this.setState({loading: false,data: data});
+
+  // }catch (error){
+  //   this.setState({loading: false,error: error});
+
+  // }
+  // }
+
   render() {
+    // if (this.state.loding === true){
+    //   return 'Loading...';
+    // }
     return (
       <div>
         <CandidateList candidates={this.state.data} />
-        <Link to="/admin/election" className="btn btn-primary">
+        <a
+          className="App-link"
+          href="http://localhost:8888/.netlify/functions/hello"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           Votar
-        </Link>
+        </a>
       </div>
     );
   }
