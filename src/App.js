@@ -1,25 +1,17 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Vote from './components/users/Vote';
+import Election from './components/admin/Election';
+import { BrowserRouter, Route } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="http://localhost:8888/.netlify/functions/hello"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <switch>
+      <BrowserRouter>
+        <Route exact path="/vote" component={Vote} />
+        <Route exact path="/admin/election" component={Election} />
+      </BrowserRouter>
+    </switch>
   );
 }
 
