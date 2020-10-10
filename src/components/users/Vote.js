@@ -47,7 +47,7 @@ class Vote extends React.Component {
         <div>
           <a
             className="App-link"
-            href="http://localhost:8888/.netlify/functions/hello"
+            href="http://localhost:8888/.netlify/functions/getElections"
             target="_blank"
             rel="noopener noreferrer"
           >
