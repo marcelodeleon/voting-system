@@ -1,10 +1,10 @@
-// TODO: Remove after adding the first endpoint!
 const { Election } = require('../libs/models');
 const { mongodb } = require('../libs/connectors');
 
 const mongodbUri = process.env.MONGODB_URI;
 
 exports.handler = async (event, context, callback) => {
+  context.callbackWaitsForEmptyEventLoop = false;
   // "event" has information about the path, body, headers, etc. of the request
   await mongodb(mongodbUri);
 
