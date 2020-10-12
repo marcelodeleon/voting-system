@@ -5,8 +5,19 @@ const { mongodb } = require('../libs/connectors');
 const mongodbUri = process.env.MONGODB_URI;
 
 exports.handler = async (event, context, callback) => {
+  // "event" has information about the path, body, headers, etc. of the request
   await mongodb(mongodbUri);
-  return await Election.find()
+
+  const election = new Election({
+    name: 'TestN',
+    description: 'A desc for the test',
+    proposals: [{ title: 'newprop', options: ['opt1', 'opt2'] }],
+    startAt: new Date(),
+    endAt: new Date(),
+  });
+
+  await election
+    .save()
     .then((doc) => {
       console.log(doc);
       return callback(null, {
