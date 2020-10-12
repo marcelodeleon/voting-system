@@ -6,7 +6,7 @@ const mongodbUri = process.env.MONGODB_URI;
 
 exports.handler = async (event, context, callback) => {
   await mongodb(mongodbUri);
-  return await Election.find()
+  await Election.deleteMany()
     .then((doc) => {
       console.log(doc);
       return callback(null, {

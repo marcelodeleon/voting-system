@@ -14,10 +14,28 @@ exports.handler = async (event, context, callback) => {
     startAt: new Date(),
     endAt: new Date(),
   });
-  await election.save();
+  // await election.save()
+  // .then(doc => {
+  //   console.log(doc)
+  // })
+  // .catch(err => {
+  //   console.error(err)
+  // });
+
+  await Election.find()
+    .then((doc) => {
+      console.log(doc);
+      event.body = doc;
+    })
+    .catch((err) => {
+      console.error(err);
+      event.body = doc;
+    });
 
   callback(null, {
     statusCode: 200,
-    body: 'Hello, World',
+    body: JSON.stringify({
+      data: '⊂◉‿◉つ',
+    }),
   });
 };
