@@ -9,7 +9,7 @@ exports.handler = async (event, context, callback) => {
   await mongodb(mongodbUri);
 
   const election = new Election({
-    name: 'TestN ',
+    name: 'TestN',
     description: 'A desc for the test',
     proposals: [{ title: 'newprop', options: ['opt1', 'opt2'] }],
     startAt: new Date(),
