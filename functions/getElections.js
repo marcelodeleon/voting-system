@@ -8,7 +8,7 @@ exports.handler = async (event, context, callback) => {
   await mongodb(mongodbUri);
   return await Election.find()
     .then((doc) => {
-      console.log(doc);
+      //   console.log(doc);
       return callback(null, {
         statusCode: 200,
         body: JSON.stringify(doc),
