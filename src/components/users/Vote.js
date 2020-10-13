@@ -17,7 +17,6 @@ class Vote extends React.Component {
       .then((res) => res.json())
       .then(
         (result) => {
-          console.log(result);
           this.setState({
             isLoaded: true,
             items: result,
@@ -44,16 +43,14 @@ class Vote extends React.Component {
           <div>
             <Navbar />
           </div>
-          <ul>
-            {items.map((item) => (
-              <li key={item.name}>
-                {item.name}
-                {item.description}
-                {item.startAt}
-                {item.endAt}
-              </li>
-            ))}
-          </ul>
+          {items.map((item) => (
+            <td key={item.name}>
+              {item.name}
+              {item.description}
+              {item.startAt}
+              {item.endAt}
+            </td>
+          ))}
         </React.Fragment>
       );
     }

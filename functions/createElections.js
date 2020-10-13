@@ -9,7 +9,7 @@ exports.handler = async (event, context, callback) => {
   await mongodb(mongodbUri);
 
   const election = new Election({
-    name: 'TestN ',
+    name: 'TestN',
     description: 'A desc for the test',
     proposals: [{ title: 'newprop', options: ['opt1', 'opt2'] }],
     startAt: new Date(),
@@ -19,7 +19,6 @@ exports.handler = async (event, context, callback) => {
   await election
     .save()
     .then((doc) => {
-      console.log(doc);
       return callback(null, {
         statusCode: 200,
         body: JSON.stringify(doc),

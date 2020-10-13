@@ -8,7 +8,6 @@ exports.handler = async (event, context, callback) => {
   await mongodb(mongodbUri);
   await Election.deleteMany()
     .then((doc) => {
-      console.log(doc);
       return callback(null, {
         statusCode: 200,
         body: JSON.stringify(doc),
