@@ -1,0 +1,23 @@
+.Election__vote {
+    border: 3px solid rgb(0, 69, 124);
+    background: #EDF1FA;
+    padding: 5px;
+    width: 100%;
+    margin: 5px;
+    max-width: 240px;
+    min-width: 200px;
+    min-height: 200px;
+    height: fit-content;
+    position: relative;
+    color: #00457C;
+    display: inline-block; }
+
+.Btn__component{
+    background-color: #00457C;
+    color: #fff;
+    border-radius: 0;
+    font-size: 1em;
+    margin-top: 100px;
+    margin-bottom: 5px;
+    margin-left: 180px;
+}
