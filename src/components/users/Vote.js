@@ -1,6 +1,7 @@
 import React from 'react';
 //import CandidateList from '../../components/CandidateList';
 import Navbar from '../Navbar';
+import '../styles/Vote.css';
 
 class Vote extends React.Component {
   constructor(props) {
@@ -44,11 +45,26 @@ class Vote extends React.Component {
             <Navbar />
           </div>
           {items.map((item) => (
-            <td key={item.name}>
-              {item.name}
-              {item.description}
-              {item.startAt}
-              {item.endAt}
+            <td className="Election__vote" key={item.name}>
+              <tr>
+                <b>Nombre:</b>
+              </tr>
+              <tr>{item.name}</tr>
+              <tr>
+                <b>Descripcion:</b>
+              </tr>
+              <tr>{item.description}</tr>
+              <tr>
+                <b>Comienza:</b>
+              </tr>
+              <tr>{item.startAt}</tr>
+              <tr>
+                <b>Termina:</b>
+              </tr>
+              <tr>{item.endAt}</tr>
+              <button className="Btn__component" type="button">
+                Votar
+              </button>
             </td>
           ))}
         </React.Fragment>
