@@ -14,6 +14,14 @@ export default function Election() {
   return (
     <div>
       <h1>Nueva Eleccion</h1>
+      <a
+        className="App-link"
+        href="../.netlify/functions/hello"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Learn React
+      </a>
       <form onSubmit={handleSubmit}>
         <label>
           Nombre:
