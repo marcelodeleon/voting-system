@@ -55,6 +55,10 @@ class Vote extends React.Component {
               </tr>
               <tr>{item.description}</tr>
               <tr>
+                <b>Descripcion:</b>
+              </tr>
+              <tr>{item.proposals.type}</tr>
+              <tr>
                 <b>Comienza:</b>
               </tr>
               <tr>{item.startAt}</tr>
