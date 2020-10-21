@@ -1,25 +1,20 @@
-const { Election } = require('../libs/models');
+// TODO: Remove after adding the first endpoint!
+const { Result } = require('../libs/models');
 const { mongodb } = require('../libs/connectors');
 
 const mongodbUri = process.env.MONGODB_URI;
 
 exports.handler = async (event, context, callback) => {
-  context.callbackWaitsForEmptyEventLoop = false;
   // "event" has information about the path, body, headers, etc. of the request
   await mongodb(mongodbUri);
 
-  const election = new Election({
-    name: 'TestN',
-    description: 'A desc for the test',
-    proposals: [{ title: 'newprop', options: ['opt1', 'opt2'] }],
-    startAt: new Date(),
-    endAt: new Date(),
-    city: 'Montevideo',
-    states: 'Montevideo',
-    age: '23',
+  const result = new Result({
+    idElection: '1234',
+    proposal: 'newprop',
+    count: 2,
   });
 
-  await election
+  await result
     .save()
     .then((doc) => {
       return callback(null, {
