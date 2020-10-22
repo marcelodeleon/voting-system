@@ -8,6 +8,16 @@ exports.handler = async (event, context, callback) => {
   const name = event.queryStringParameters.name || 'World';
   await mongodb(mongodbUri);
 
+  console.log('Running hello function');
+  try {
+    console.log('Connecting db');
+    await mongodb(mongodbUri);
+  } catch (error) {
+    console.log(error);
+  }
+  console.log('finished connection');
+
+  console.log('creating election');
   const election = new Election({
     name: name,
     description: 'A desc for the test',
@@ -19,6 +29,7 @@ exports.handler = async (event, context, callback) => {
     age: '23',
   });
   await election.save();
+  console.log('election created');
 
   callback(null, {
     statusCode: 200,
