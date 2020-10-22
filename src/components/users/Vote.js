@@ -69,9 +69,9 @@ class Vote extends React.Component {
                       <tr>
                         <input
                           type="radio"
-                          name="recordIds${data.id}"
+                          //name="recordIds${data.id}"
                           value="insert"
-                          id="insert-${data.id}"
+                          //id="insert-${data.id}"
                         />
                         {option}
                       </tr>
