@@ -4,11 +4,12 @@ import ModalProposal from '../admin/ModalProposal';
 
 export default function Election() {
   const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
   const [startAt, setStartAt] = useState(new Date());
   const [endAt, setEndAt] = useState(new Date());
   const [isOpenModal, setIsOpenModal] = useState(false);
-  var [proposalsList, setProposals] = useState([]);
-  var proposalsObj = {};
+  const [proposalsList, setProposals] = useState([]);
+  const proposalsObj = {};
 
   const loadProposals = (data) => {
     data.forEach((item) => {
@@ -73,8 +74,8 @@ export default function Election() {
           Descripcion:
           <input
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
           />
         </label>
         <label>
