@@ -8,8 +8,8 @@ export default function Election() {
   const [startAt, setStartAt] = useState(new Date());
   const [endAt, setEndAt] = useState(new Date());
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const [proposalsList, setProposals] = useState([]);
-  const proposalsObj = {};
+  let [proposalsList, setProposals] = useState([]);
+  let proposalsObj = {};
 
   const loadProposals = (data) => {
     data.forEach((item) => {
@@ -36,6 +36,8 @@ export default function Election() {
     evt.preventDefault();
     /* eslint-disable-next-line */
     console.log('Submitting');
+    console.log({ name });
+    console.log({ description });
   };
 
   const openModal = () => {
@@ -50,6 +52,7 @@ export default function Election() {
     event.preventDefault();
     setIsOpenModal(false);
   };
+
   return (
     <div>
       <h1>Nueva Eleccion</h1>
