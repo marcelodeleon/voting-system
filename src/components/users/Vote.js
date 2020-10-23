@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from '../Navbar';
 import '../styles/Vote.css';
+import apiClient from '../../utils/api-client';
 
 class Vote extends React.Component {
   constructor(props) {
@@ -13,20 +14,13 @@ class Vote extends React.Component {
   }
 
   componentDidMount = async () => {
-    await fetch('../.netlify/functions/getElections')
-      .then((res) => res.json())
-      .then((result) => {
-        this.setState({
-          isLoaded: true,
-          items: result,
-        });
-      })
-      .catch((error) => {
-        this.setState({
-          isLoaded: true,
-          error,
-        });
-      });
+    try {
+      const elections = await apiClient.get('getElections');
+      this.setState({ isLoaded: true, items: elections });
+    } catch (error) {
+      this.setState({ isLoaded: true });
+      alert(error.message);
+    }
   };
   render() {
     const { error, isLoaded, items } = this.state;
