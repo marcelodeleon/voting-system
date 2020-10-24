@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
-import ModalProposal from '../admin/ModalProposal';
+import ModalProposal from './ModalProposal';
+import apiClient from '../../utils/api-client';
 
 export default function Election() {
   const [name, setName] = useState('');
@@ -14,30 +15,39 @@ export default function Election() {
   const loadProposals = (data) => {
     data.forEach((item) => {
       if (
-        proposalsList.filter((elem) => elem['title'] === item['title'])
-          .length === 0
+        proposalsList.filter((elem) => elem.title === item.title).length === 0
       ) {
         setProposals((proposalsList = proposalsList.concat(item)));
       }
     });
     loadProposalsObj(proposalsList);
-    console.log(proposalsObj);
   };
 
   const loadProposalsObj = (data) => {
-    let obj = {};
-    for (var i = 0; i < data.length; i++) {
+    const obj = {};
+    for (let i = 0; i < data.length; i++) {
       obj[i] = data[i];
     }
     proposalsObj = obj;
   };
 
-  const handleSubmit = (evt) => {
+  const handleSubmit = async (evt) => {
     evt.preventDefault();
-    /* eslint-disable-next-line */
-    console.log('Submitting');
-    console.log({ name });
-    console.log({ description });
+    try {
+      await apiClient.post('createElections', {
+        body: {
+          electionData: {
+            name,
+            description,
+            proposals: proposalsList,
+            startAt,
+            endAt,
+          },
+        },
+      });
+    } catch (error) {
+      alert(error.message);
+    }
   };
 
   const openModal = () => {
