@@ -5,30 +5,15 @@ const mongodbUri = process.env.MONGODB_URI;
 
 exports.handler = async (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false;
-  // "event" has information about the path, body, headers, etc. of the request
   await mongodb(mongodbUri);
 
-  const election = new Election({
-    name: 'TestN',
-    description: 'A desc for the test',
-    proposals: [{ title: 'newprop', options: ['opt1', 'opt2'] }],
-    startAt: new Date(),
-    endAt: new Date(),
-  });
+  const { electionData } = JSON.parse(event.body);
 
-  await election
-    .save()
-    .then((doc) => {
-      return callback(null, {
-        statusCode: 200,
-        body: JSON.stringify(doc),
-      });
-    })
-    .catch((err) => {
-      console.error(err);
-      return callback(null, {
-        statusCode: 400,
-        body: JSON.stringify(error),
-      });
-    });
+  const election = new Election(electionData);
+  await election.save();
+
+  return callback(null, {
+    statusCode: 200,
+    body: JSON.stringify({ msg: 'ok' }),
+  });
 };

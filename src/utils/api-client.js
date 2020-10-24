@@ -1,7 +1,12 @@
-const { REACT_APP_API_ORIGIN } = process.env;
+const { NODE_ENV } = process.env;
 
 async function request(resource, config) {
-  const response = await fetch(`${REACT_APP_API_ORIGIN}${resource}`, {
+  const apiOrigin =
+    NODE_ENV === 'development'
+      ? 'http://localhost:8888/.netlify/functions/'
+      : 'https://voting-system-tas.netlify.app/.netlify/functions/';
+
+  const response = await fetch(`${apiOrigin}${resource}`, {
     ...config,
     headers: {
       'Content-Type': 'application/json',
