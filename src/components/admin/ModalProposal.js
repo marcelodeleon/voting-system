@@ -56,6 +56,7 @@ class ModalProposal extends React.Component {
     event.preventDefault();
     this.setState({ title: event.target.value });
   };
+
   handleOptionChange = (event) => {
     event.preventDefault();
     this.setState({ optionInput: event.target.value });
