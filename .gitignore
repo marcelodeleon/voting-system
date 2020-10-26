@@ -25,3 +25,5 @@ yarnerror.log*
 
 # Local Netlify folder
 .netlify
+sendgrid.env
+sendgrid.env

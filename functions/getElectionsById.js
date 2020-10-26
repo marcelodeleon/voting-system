@@ -6,7 +6,7 @@ const mongodbUri = process.env.MONGODB_URI;
 
 exports.handler = async (event, context, callback) => {
   await mongodb(mongodbUri);
-  return await Election.find({ _id: '5f88dcb4319425bdc264290a' })
+  return await Election.find({ _id: '5f961824400dfa6b55ae7324' })
     .then((doc) => {
       //   console.log(doc);
       return callback(null, {

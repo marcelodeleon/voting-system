@@ -17,7 +17,7 @@ class ModalProposal extends React.Component {
     event.preventDefault();
     var allOptions = [];
     this.state.optionInput.split('/').forEach((option) => {
-      let obj = {};
+      let obj = [{}];
       obj[option] = 0;
       if (
         allOptions.filter((item) => item.hasOwnProperty(option)).length === 0

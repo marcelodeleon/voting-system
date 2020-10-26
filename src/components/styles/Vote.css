@@ -10,7 +10,8 @@
     height: fit-content;
     position: relative;
     color: #00457C;
-    display: inline-block; }
+    display: inline-block;
+    align-content: center; }
 
 .Btn__component{
     background-color: #00457C;
