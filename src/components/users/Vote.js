@@ -15,7 +15,7 @@ class Vote extends React.Component {
 
   componentDidMount = async () => {
     try {
-      const elections = await apiClient.get('getElections');
+      const elections = await apiClient.get('getElectionsById');
       this.setState({ isLoaded: true, items: elections });
     } catch (error) {
       this.setState({ isLoaded: true });
@@ -62,7 +62,7 @@ class Vote extends React.Component {
                       <tr>
                         <input
                           type="radio"
-                          //name="recordIds${data.id}"
+                          name="opcion"
                           value="insert"
                           //id="insert-${data.id}"
                         />
@@ -80,9 +80,6 @@ class Vote extends React.Component {
                 <b>Termina:</b>
               </tr>
               <tr>{item.endAt}</tr>
-              <tr>
-                <input type="text" name="name" />
-              </tr>
               <button className="Btn__component" type="submit">
                 Votar
               </button>
