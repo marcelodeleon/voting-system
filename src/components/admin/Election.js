@@ -9,8 +9,19 @@ export default function Election() {
   const [startAt, setStartAt] = useState(new Date());
   const [endAt, setEndAt] = useState(new Date());
   const [isOpenModal, setIsOpenModal] = useState(false);
+  // eslint-disable-next-line
   let [proposalsList, setProposals] = useState([]);
+
+  // eslint-disable-next-line
   let proposalsObj = {};
+
+  const loadProposalsObj = (data) => {
+    const obj = {};
+    for (let i = 0; i < data.length; i += 1) {
+      obj[i] = data[i];
+    }
+    proposalsObj = obj;
+  };
 
   const loadProposals = (data) => {
     data.forEach((item) => {
@@ -21,14 +32,6 @@ export default function Election() {
       }
     });
     loadProposalsObj(proposalsList);
-  };
-
-  const loadProposalsObj = (data) => {
-    const obj = {};
-    for (let i = 0; i < data.length; i++) {
-      obj[i] = data[i];
-    }
-    proposalsObj = obj;
   };
 
   const handleSubmit = async (evt) => {
