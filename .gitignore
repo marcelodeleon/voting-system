@@ -21,6 +21,7 @@
 npmdebug.log*
 yarndebug.log*
 yarnerror.log*
+yarn-error.log*
 .eslintcache
 
 # Local Netlify folder
