@@ -37,7 +37,9 @@ class Vote extends React.Component {
 
   componentDidMount = async () => {
     try {
-      const election = await apiClient.get('getElectionsById');
+      const election = await apiClient.get(
+        'getElectionsById?electionId=testing',
+      );
       this.setState({ isLoaded: true, item: election });
     } catch (error) {
       this.setState({ isLoaded: true });
