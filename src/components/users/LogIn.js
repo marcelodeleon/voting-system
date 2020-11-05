@@ -14,11 +14,21 @@ const LogInForm = styled.form`
 `;
 
 const LogInFields = styled.div`
-  flex-direction: colum;
   border: 1px solid teal;
   border-radius: 1rem;
-  width: 40rem;
   padding: 3rem 2rem;
+`;
+
+const SubmitInput = styled.input`
+  height: 2.5rem;
+  background: teal;
+  color: white;
+  font: inherit;
+  border: 1.5px solid #0e4f1f;
+  padding: 0.5rem;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
 `;
 
 export default function LogIn() {
@@ -63,7 +73,7 @@ export default function LogIn() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </label>
-        <input type="submit" value="Log In" />
+        <SubmitInput type="submit" value="Log In" />
       </LogInFields>
     </LogInForm>
   );

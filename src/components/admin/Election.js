@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import ModalProposal from './ModalProposal';
 import apiClient from '../../utils/api-client';
+import '../styles/Election.css';
 
 export default function Election() {
   const [name, setName] = useState('');
@@ -68,16 +69,8 @@ export default function Election() {
 
   return (
     <div>
-      <h1>Nueva Eleccion</h1>
-      <a
-        className="App-link"
-        href="../.netlify/functions/hello"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Learn React
-      </a>
-      <form onSubmit={handleSubmit}>
+      <h1 className="election-title">Nueva Eleccion</h1>
+      <form className="election-form" onSubmit={handleSubmit}>
         <label>
           Nombre:
           <input
@@ -105,16 +98,18 @@ export default function Election() {
           Fecha Fin:
           <DatePicker selected={endAt} onChange={(date) => setEndAt(date)} />
         </label>
-        <input type="submit" value="Submit" />
+        {isOpenModal && (
+          <ModalProposal
+            closeModal={closeModal}
+            cancelModal={cancelModal}
+            sendProposals={loadProposals}
+          />
+        )}
+        <button className={'form-component'} onClick={openModal}>
+          Crear Propuestas
+        </button>
+        <input className={'form-component'} type="submit" value="Submit" />
       </form>
-      <button onClick={openModal}>Crear Propuestas</button>
-      {isOpenModal && (
-        <ModalProposal
-          closeModal={closeModal}
-          cancelModal={cancelModal}
-          sendProposals={loadProposals}
-        />
-      )}
     </div>
   );
 }
