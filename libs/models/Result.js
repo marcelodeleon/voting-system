@@ -1,12 +1,11 @@
 const mongoose = require('mongoose');
 
-const resultSchema = new mongoose.Schema(
+const { Schema } = mongoose;
+
+const resultSchema = new Schema(
   {
-    idElection: { type: String, required: false },
-    proposals: {
-      type: Object,
-      required: false,
-    },
+    electionId: { type: Schema.Types.ObjectId, required: true },
+    proposals: { type: Object, required: true },
   },
   { timestamps: true },
 );
