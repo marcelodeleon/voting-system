@@ -1,5 +1,4 @@
 import React from 'react';
-//import CandidateList from '../../components/CandidateList';
 import Navbar from '../Navbar';
 import '../styles/Vote.css';
 import apiClient from '../../utils/api-client';
@@ -24,7 +23,6 @@ class Vote extends React.Component {
   handleSubmit = async (evt) => {
     evt.preventDefault();
     const { proposals } = this.state;
-    console.log({ proposals });
     try {
       await apiClient.post('createResult', {
         body: {
@@ -70,34 +68,27 @@ class Vote extends React.Component {
                 </li>
                 <li>{item.description}</li>
                 <li>
-                  <b>Propuesta:</b>
+                  <b>Propuestas:</b>
                 </li>
                 <li>
                   <ul>
                     {item.proposals.map((proposal) => (
-                      <li key={proposal.title}>{proposal.title}</li>
-                    ))}
-                  </ul>
-                </li>
-                <li>
-                  <b>Opciones:</b>
-                </li>
-                <li>
-                  <ul>
-                    {item.proposals.map((proposal) => (
-                      <ul key={proposal.title}>
-                        {proposal.options.map((option) => (
-                          <li key={option}>
-                            <input
-                              type="radio"
-                              name={proposal.title}
-                              value={option}
-                              onChange={(e) => this.handleOptionChange(e)}
-                            />
-                            {option}
-                          </li>
-                        ))}
-                      </ul>
+                      <li key={proposal.title}>
+                        <b>{proposal.title}</b>
+                        <ul key={proposal.title}>
+                          {proposal.options.map((option) => (
+                            <li key={option}>
+                              <input
+                                type="radio"
+                                name={proposal.title}
+                                value={option}
+                                onChange={(e) => this.handleOptionChange(e)}
+                              />
+                              {option}
+                            </li>
+                          ))}
+                        </ul>
+                      </li>
                     ))}
                   </ul>
                 </li>
