@@ -1,6 +1,7 @@
 const { Election } = require('../libs/models');
 const { Result } = require('../libs/models');
 const { mongodb } = require('../libs/connectors');
+
 const mongodbUri = process.env.MONGODB_URI;
 
 exports.handler = async (event, context, callback) => {
@@ -8,20 +9,27 @@ exports.handler = async (event, context, callback) => {
   await mongodb(mongodbUri);
 
   const { electionData } = JSON.parse(event.body);
-  console.log(electionData);
-  console.log(electionData.name);
-  console.log(electionData.proposals.map((proposal) => proposal.title));
-  console.log(
-    electionData.proposals.map((proposal) =>
-      proposal.options.map((option) => option),
-    ),
-  );
 
   const election = new Election(electionData);
-  const result = new Result();
-  result.idElection = 1;
-  result.proposals = electionData.proposals;
-  await election.save();
+  const newElection = await election.save();
+
+  const resultProposalsData = electionData.proposals.reduce(
+    (accProposals, proposal) => {
+      const options = proposal.options.reduce((accOptions, option) => {
+        return { ...accOptions, [option]: 0 };
+      }, {});
+
+      return { ...accProposals, [proposal.title]: options };
+    },
+    {},
+  );
+
+  const resultData = {
+    electionId: newElection.id,
+    proposals: resultProposalsData,
+  };
+
+  const result = new Result(resultData);
   await result.save();
 
   return callback(null, {

@@ -18,7 +18,7 @@ class Vote extends React.Component {
 
   handleOptionChange = (changeEvent) => {
     const { value, name } = changeEvent.target;
-    const proposals = { ...this.proposals, [name]: { [value]: 0 } };
+    const proposals = { ...this.proposals, [name]: value };
     this.setState({ proposals });
   };
 
@@ -26,11 +26,10 @@ class Vote extends React.Component {
     evt.preventDefault();
     const { proposals } = this.state;
     try {
+      console.log('Proposals', proposals);
       await apiClient.post('createResult', {
         body: {
-          resultData: {
-            proposals,
-          },
+          proposals,
         },
       });
     } catch (error) {
