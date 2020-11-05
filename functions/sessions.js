@@ -13,7 +13,7 @@ exports.handler = async (event) => {
   const { email, password } = JSON.parse(body);
 
   const foundUser = await User.findOne({ email });
-  if (!foundUser || foundUser.password !== password) {
+  if (!foundUser || !(await foundUser.comparePassword(password))) {
     return {
       statusCode: 401,
       headers: {
