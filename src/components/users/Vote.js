@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from '../Navbar';
 import '../styles/Vote.css';
+import queryParams from 'query-params';
 import apiClient from '../../utils/api-client';
 
 class Vote extends React.Component {
@@ -9,7 +10,7 @@ class Vote extends React.Component {
     this.state = {
       isLoaded: false,
       error: null,
-      items: [],
+      item: null,
       proposals: {},
     };
   }
@@ -37,19 +38,24 @@ class Vote extends React.Component {
 
   componentDidMount = async () => {
     try {
+      const query = queryParams.decode(this.props.location.search.substring(1));
+      const { electionId } = query;
+
       const election = await apiClient.get(
-        'getElectionsById?electionId=testing',
+        `getElectionsById?electionId=${electionId}`,
       );
+
+      console.log({ election });
       this.setState({ isLoaded: true, item: election });
     } catch (error) {
-      this.setState({ isLoaded: true });
-      alert(error.message);
+      this.setState({ isLoaded: true, error: error });
+      alert(error);
     }
   };
   render() {
     const { error, isLoaded, item } = this.state;
     if (error) {
-      return <div>Error: {error.message}</div>;
+      return <div>Error: {error}</div>;
     } else if (!isLoaded) {
       return <div>Loading...</div>;
     } else {

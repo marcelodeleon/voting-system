@@ -8,15 +8,13 @@ const mongodbUri = process.env.MONGODB_URI;
 exports.handler = async (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false;
 
-  console.log({ test: event.queryStringParameters });
-
   const { electionId } = event.queryStringParameters;
 
   await mongodb(mongodbUri);
 
   try {
     const election = await Election.findOne({
-      electionId: Types.ObjectId(electionId),
+      _id: Types.ObjectId(electionId),
     });
 
     return callback(null, {
@@ -28,7 +26,7 @@ exports.handler = async (event, context, callback) => {
     });
   } catch (error) {
     return callback(null, {
-      statusCode: 400,
+      statusCode: 404,
       body: JSON.stringify({ error: 'No existe esa eleccion' }),
     });
   }
