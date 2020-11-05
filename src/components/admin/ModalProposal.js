@@ -15,16 +15,16 @@ class ModalProposal extends React.Component {
 
   handleNewProposal = (event) => {
     event.preventDefault();
-    var allOptions = [];
-    this.state.optionInput.split('/').forEach((option) => {
-      let obj = [{}];
-      obj[option] = 0;
-      if (
-        allOptions.filter((item) => item.hasOwnProperty(option)).length === 0
-      ) {
-        allOptions = [...allOptions, obj];
-      }
-    });
+    // var allOptions = [];
+    // this.state.optionInput.split('/').forEach((option) => {
+    //   let obj = [{}];
+    //   obj[option] = 0;
+    //   if (
+    //     allOptions.filter((item) => item.hasOwnProperty(option)).length === 0
+    //   ) {
+    //     allOptions = [...allOptions, obj];
+    //   }
+    // });
     if (
       this.state.proposals.filter((item) => item['title'] === this.state.title)
         .length === 0 &&
@@ -34,7 +34,7 @@ class ModalProposal extends React.Component {
       this.setState({
         proposals: this.state.proposals.concat({
           title: this.state.title,
-          options: allOptions,
+          options: this.state.optionInput.split('/'),
         }),
 
         title: '',

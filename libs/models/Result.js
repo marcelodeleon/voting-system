@@ -2,9 +2,11 @@ const mongoose = require('mongoose');
 
 const resultSchema = new mongoose.Schema(
   {
-    idElection: { type: String, required: true },
-    proposal: { type: String, required: true },
-    count: { type: Number, required: true },
+    idElection: { type: String, required: false },
+    proposals: {
+      type: Object,
+      required: false,
+    },
   },
   { timestamps: true },
 );
