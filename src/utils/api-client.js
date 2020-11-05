@@ -20,6 +20,8 @@ async function request(resource, config) {
       return body;
     return Promise.reject(body.error);
   } catch (error) {
+    if (response.status === 500)
+      return Promise.reject(new Error('Internal Server Error'));
     return Promise.reject(error);
   }
 }
