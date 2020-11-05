@@ -5,14 +5,12 @@ const { mongodb } = require('../libs/connectors');
 const mongodbUri = process.env.MONGODB_URI;
 
 exports.handler = async (event, context, callback) => {
-  // "event" has information about the path, body, headers, etc. of the request
+  context.callbackWaitsForEmptyEventLoop = false;
   await mongodb(mongodbUri);
 
-  const result = new Result({
-    idElection: '1234',
-    proposal: 'newprop',
-    count: 2,
-  });
+  const { resultData } = JSON.parse(event.body);
+
+  const result = new Result(resultData);
 
   await result
     .save()

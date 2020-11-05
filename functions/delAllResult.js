@@ -1,14 +1,14 @@
-// TODO: Remove after adding the first endpoint!
-const { Election } = require('../libs/models');
+const { Result } = require('../libs/models');
 const { mongodb } = require('../libs/connectors');
 
 const mongodbUri = process.env.MONGODB_URI;
 
 exports.handler = async (event, context, callback) => {
+  context.callbackWaitsForEmptyEventLoop = false;
+
   await mongodb(mongodbUri);
-  return await Election.find({ _id: 'x`' })
+  await Result.deleteMany()
     .then((doc) => {
-      //   console.log(doc);
       return callback(null, {
         statusCode: 200,
         body: JSON.stringify(doc),
