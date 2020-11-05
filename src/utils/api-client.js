@@ -16,8 +16,10 @@ async function request(resource, config) {
 
   try {
     const body = await response.clone().json();
+    console.log({ status: response.status });
     if (response.ok || (response.status >= 200 && response.status < 400))
       return body;
+    console.log({ body });
     return Promise.reject(body.error);
   } catch (error) {
     if (response.status === 500)
