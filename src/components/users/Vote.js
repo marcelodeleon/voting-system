@@ -40,15 +40,15 @@ class Vote extends React.Component {
 
   componentDidMount = async () => {
     try {
-      const elections = await apiClient.get('getElectionsById');
-      this.setState({ isLoaded: true, items: elections });
+      const election = await apiClient.get('getElectionsById');
+      this.setState({ isLoaded: true, item: election });
     } catch (error) {
       this.setState({ isLoaded: true });
       alert(error.message);
     }
   };
   render() {
-    const { error, isLoaded, items } = this.state;
+    const { error, isLoaded, item } = this.state;
     if (error) {
       return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {
@@ -60,57 +60,61 @@ class Vote extends React.Component {
             <Navbar />
           </div>
           <form onSubmit={this.handleSubmit}>
-            {items.map((item) => (
-              <td className="Election__vote" key={item.name}>
-                <tr>
+            <div className="Election__vote" key={item.name}>
+              <ul>
+                <li>
                   <b>Eleccion:</b>
-                </tr>
-                <tr>{item.name}</tr>
-                <tr>
+                </li>
+                <li>{item.name}</li>
+                <li>
                   <b>Descripcion:</b>
-                </tr>
-                <tr>{item.description}</tr>
-                <tr>
+                </li>
+                <li>{item.description}</li>
+                <li>
                   <b>Propuesta:</b>
-                </tr>
-                <tr>
-                  {item.proposals.map((proposal) => (
-                    <tr>{proposal.title}</tr>
-                  ))}
-                </tr>
-                <tr>
+                </li>
+                <li>
+                  <ul>
+                    {item.proposals.map((proposal) => (
+                      <li key={proposal.title}>{proposal.title}</li>
+                    ))}
+                  </ul>
+                </li>
+                <li>
                   <b>Opciones:</b>
-                </tr>
-                <tr>
-                  {item.proposals.map((proposal) => (
-                    <tr>
-                      {proposal.options.map((option) => (
-                        <tr>
-                          <input
-                            type="radio"
-                            name={proposal.title}
-                            value={option}
-                            onChange={(e) => this.handleOptionChange(e)}
-                          />
-                          {option}
-                        </tr>
-                      ))}
-                    </tr>
-                  ))}
-                </tr>
-                <tr>
+                </li>
+                <li>
+                  <ul>
+                    {item.proposals.map((proposal) => (
+                      <ul key={proposal.title}>
+                        {proposal.options.map((option) => (
+                          <li key={option}>
+                            <input
+                              type="radio"
+                              name={proposal.title}
+                              value={option}
+                              onChange={(e) => this.handleOptionChange(e)}
+                            />
+                            {option}
+                          </li>
+                        ))}
+                      </ul>
+                    ))}
+                  </ul>
+                </li>
+                <li>
                   <b>Comienza:</b>
-                </tr>
-                <tr>{item.startAt}</tr>
-                <tr>
+                </li>
+                <li>{item.startAt}</li>
+                <li>
                   <b>Termina:</b>
-                </tr>
-                <tr>{item.endAt}</tr>
-                <button className="Btn__component" type="submit">
-                  Votar
-                </button>
-              </td>
-            ))}
+                </li>
+                <li>{item.endAt}</li>
+              </ul>
+              <button className="Btn__component" type="submit">
+                Votar
+              </button>
+            </div>
           </form>
         </React.Fragment>
       );

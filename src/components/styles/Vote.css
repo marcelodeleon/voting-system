@@ -22,3 +22,8 @@
     margin-bottom: 5px;
     margin-left: 180px;
 }
+
+ul {
+  margin: 0;
+  padding: 0;
+}
