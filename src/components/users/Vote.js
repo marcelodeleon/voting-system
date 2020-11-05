@@ -11,24 +11,24 @@ class Vote extends React.Component {
       isLoaded: false,
       error: null,
       items: [],
-      idElection: null,
       proposals: {},
     };
   }
 
   handleOptionChange = (changeEvent) => {
     const { value, name } = changeEvent.target;
-    const proposals = { ...this.proposals, [name]: value };
+    const proposals = { ...this.state.proposals, [name]: value };
     this.setState({ proposals });
   };
 
   handleSubmit = async (evt) => {
     evt.preventDefault();
     const { proposals } = this.state;
+    console.log({ proposals });
     try {
-      console.log('Proposals', proposals);
       await apiClient.post('createResult', {
         body: {
+          electionId: this.state.item._id,
           proposals,
         },
       });
