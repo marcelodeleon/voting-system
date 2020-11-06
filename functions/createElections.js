@@ -7,8 +7,8 @@ const { NODE_ENV } = process.env;
 const mongodbUri = process.env.MONGODB_URI;
 const urlOrigin =
   NODE_ENV === 'development'
-    ? 'http://localhost:8888/vote'
-    : 'https://voting-system-tas.netlify.app/vote';
+    ? 'http://localhost:8888/vote?electionId='
+    : 'https://voting-system-tas.netlify.app/vote?electionId=';
 
 exports.handler = async (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false;
@@ -17,7 +17,6 @@ exports.handler = async (event, context, callback) => {
   const { electionData } = JSON.parse(event.body);
   console.log(electionData);
   const election = new Election(electionData);
-<<<<<<< HEAD
   const newElection = await election.save();
 
   const resultProposalsData = electionData.proposals.reduce(
@@ -38,16 +37,13 @@ exports.handler = async (event, context, callback) => {
 
   const result = new Result(resultData);
   await result.save();
-=======
->>>>>>> 9718da5... Sending email done
-
-  await election.save();
 
   sendEmail(
     ['gonzalogg.garcia@gmail.com', 'marcebattlenet@gmail.com'],
     'hola',
     '<strong>Comienza el período de votación, ingresa </strong><a href=' +
       urlOrigin +
+      newElection.id +
       '>aquí</a>',
     new Date(electionData.startAt),
   );
