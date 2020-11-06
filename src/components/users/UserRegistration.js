@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import DatePicker from 'react-datepicker';
 import apiClient from '../../utils/api-client';
@@ -19,6 +20,7 @@ const StyledUserRegistrationForm = styled.form`
 
 export default function UserRegistration() {
   const { register, handleSubmit, errors } = useForm();
+  const history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [country, setCountry] = useState('');
@@ -31,6 +33,7 @@ export default function UserRegistration() {
       await apiClient.post('users', {
         body: { email, password, country, city, department, dateOfBirth },
       });
+      history.push('/');
     } catch (error) {
       alert(error);
     }
@@ -107,12 +110,8 @@ export default function UserRegistration() {
           <DatePicker
             selected={dateOfBirth}
             name="dateOfBirth"
-            ref={register({ required: true })}
             onChange={(date) => setDateOfBirth(date)}
           />
-          {errors.dateOfBirth && (
-            <span className="error">Campo requerido!</span>
-          )}
         </label>
         <input type="submit" value="Crear Usuario" />
       </StyledUserRegistrationForm>
