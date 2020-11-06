@@ -15,19 +15,12 @@ sgMail.setApiKey(
   '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',
 );
 
-// function sendEmail(emailTo, sendAt){
 function sendEmail(emailTo, subject, html, sendAt) {
   msg = {
-    //to: 'gonzalogg.garcia@gmail.com',
     to: emailTo,
     from: 'topicosavanzados2020.2@gmail.com',
     subject: subject,
-    //subject: 'Comienza el periodo de votacion2',
     html: html,
-    // html:
-    //   '<strong>Comienza el período de votación, ingresa </strong><a href=' +
-    //   urlOrigin +
-    //   '>aquí</a>',
     //the sendAt time is in UNIXTimestamp
     //https://www.epochconverter.com
     sendAt: unixTimestamp(sendAt),

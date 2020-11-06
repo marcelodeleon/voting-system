@@ -40,7 +40,7 @@ exports.handler = async (event, context, callback) => {
 
   sendEmail(
     ['gonzalogg.garcia@gmail.com', 'marcebattlenet@gmail.com'],
-    'hola',
+    'Comienza el periodo de votacion',
     '<strong>Comienza el período de votación, ingresa </strong><a href=' +
       urlOrigin +
       newElection.id +
