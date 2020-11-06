@@ -1,3 +1,5 @@
+import { getSessionToken } from './session';
+
 const { NODE_ENV } = process.env;
 
 async function request(resource, config) {
@@ -6,11 +8,18 @@ async function request(resource, config) {
       ? 'http://localhost:8888/.netlify/functions/'
       : 'https://voting-system-tas.netlify.app/.netlify/functions/';
 
+  const token = getSessionToken();
+  const headers = {
+    'Content-Type': 'application/json',
+  };
+
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
+  }
+
   const response = await fetch(`${apiOrigin}${resource}`, {
     ...config,
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    headers,
     body: JSON.stringify(config.body),
   });
 
