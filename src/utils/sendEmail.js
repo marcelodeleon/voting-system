@@ -33,7 +33,7 @@ function sendEmail(emailTo, subject, html, sendAt) {
     sendAt: unixTimestamp(sendAt),
   };
   sgMail
-    .send(msg)
+    .sendMultiple(msg)
     .then(() => {
       console.log(msg);
     })

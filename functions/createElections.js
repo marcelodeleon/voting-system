@@ -41,8 +41,10 @@ exports.handler = async (event, context, callback) => {
 =======
 >>>>>>> 9718da5... Sending email done
 
+  await election.save();
+
   sendEmail(
-    'gonzalogg.garcia@gmail.com',
+    ['gonzalogg.garcia@gmail.com', 'marcebattlenet@gmail.com'],
     'hola',
     '<strong>Comienza el período de votación, ingresa </strong><a href=' +
       urlOrigin +
@@ -50,7 +52,6 @@ exports.handler = async (event, context, callback) => {
     new Date(electionData.startAt),
   );
 
-  await election.save();
   return callback(null, {
     statusCode: 200,
     body: JSON.stringify({ msg: 'ok' }),
