@@ -88,3 +88,11 @@ input[type="submit"] {
   margin-top: 2rem;
   cursor: pointer;
 }
+
+a {
+  font-size: 1rem;
+  text-decoration: underline;
+  color: #617af6;
+  cursor: pointer;
+  margin-top: 1rem;
+}
