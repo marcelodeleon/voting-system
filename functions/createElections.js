@@ -1,15 +1,21 @@
 const { Election } = require('../libs/models');
 const { Result } = require('../libs/models');
 const { mongodb } = require('../libs/connectors');
+const sendEmail = require('../src/utils/sendEmail');
+const { NODE_ENV } = process.env;
 
 const mongodbUri = process.env.MONGODB_URI;
+const urlOrigin =
+  NODE_ENV === 'development'
+    ? 'http://localhost:8888/vote?electionId='
+    : 'https://voting-system-tas.netlify.app/vote?electionId=';
 
 exports.handler = async (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false;
   await mongodb(mongodbUri);
 
   const { electionData } = JSON.parse(event.body);
-
+  console.log(electionData);
   const election = new Election(electionData);
   const newElection = await election.save();
 
@@ -31,6 +37,16 @@ exports.handler = async (event, context, callback) => {
 
   const result = new Result(resultData);
   await result.save();
+
+  sendEmail(
+    ['gonzalogg.garcia@gmail.com', 'marcebattlenet@gmail.com'],
+    'Comienza el periodo de votacion',
+    '<strong>Comienza el período de votación, ingresa </strong><a href=' +
+      urlOrigin +
+      newElection.id +
+      '>aquí</a>',
+    new Date(electionData.startAt),
+  );
 
   return callback(null, {
     statusCode: 200,
