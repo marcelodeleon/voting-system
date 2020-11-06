@@ -65,9 +65,7 @@
   font-family: Arial Black;
 }
 
-input:not([type=radio]) {
-  margin-right: 1rem;
-  width: 30rem;
+input:not([type=radio]):not([type=submit]) {
   height: 1.5rem;
 }
 

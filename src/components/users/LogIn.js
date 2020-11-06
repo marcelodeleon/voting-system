@@ -24,16 +24,19 @@ const LogInFields = styled.div`
 `;
 
 const SubmitInput = styled.input`
-  height: 2.5rem;
+  width: 30rem;
   background: teal;
   color: white;
-  font: inherit;
   border: 1.5px solid #0e4f1f;
   padding: 0.5rem;
   border-radius: 8px;
   font-weight: bold;
   cursor: pointer;
 `;
+
+const inputStyle = {
+  width: '30rem',
+};
 
 export default function LogIn() {
   const { register, handleSubmit, errors } = useForm();
@@ -64,6 +67,7 @@ export default function LogIn() {
         <label>
           Email:
           <input
+            style={inputStyle}
             type="email"
             name="email"
             ref={register({ required: true })}
@@ -75,6 +79,7 @@ export default function LogIn() {
         <label>
           Password:
           <input
+            style={inputStyle}
             type="password"
             value={password}
             name="password"
