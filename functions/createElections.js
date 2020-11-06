@@ -2,8 +2,13 @@ const { Election } = require('../libs/models');
 const { Result } = require('../libs/models');
 const { mongodb } = require('../libs/connectors');
 const sendEmail = require('../src/utils/sendEmail');
+const { NODE_ENV } = process.env;
 
 const mongodbUri = process.env.MONGODB_URI;
+const urlOrigin =
+  NODE_ENV === 'development'
+    ? 'http://localhost:8888/vote'
+    : 'https://voting-system-tas.netlify.app/vote';
 
 exports.handler = async (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false;
@@ -39,7 +44,9 @@ exports.handler = async (event, context, callback) => {
   sendEmail(
     'gonzalogg.garcia@gmail.com',
     'hola',
-    '<strong>esto es un mail</strong>',
+    '<strong>Comienza el período de votación, ingresa </strong><a href=' +
+      urlOrigin +
+      '>aquí</a>',
     new Date(electionData.startAt),
   );
 
