@@ -16,6 +16,7 @@ exports.handler = async (event, context, callback) => {
     const user = await User.findOne({
       _id: Types.ObjectId(userId),
     });
+    console.log(user);
 
     if (user.emailVerificationToken !== tokenId) {
       return callback(null, {
@@ -24,12 +25,14 @@ exports.handler = async (event, context, callback) => {
       });
     }
 
+    // console.log(event.body);
+
     return callback(null, {
       statusCode: 200,
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(user),
+      body: JSON.stringify({ fruta: 'fruta' }),
     });
   } catch (error) {
     return callback(null, {

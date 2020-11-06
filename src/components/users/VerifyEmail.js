@@ -43,13 +43,14 @@ class VerifyEmail extends React.Component {
       console.log(userId);
       console.log(tokenId);
 
-      const election = await apiClient.get(
-        `validateEmail?userId=1&tokenId=asd`,
+      const validated = await apiClient.get(
+        `validateEmail?userId=${userId}&tokenId=${tokenId}`,
       );
+      console.log(validated);
 
-      this.setState({ isLoaded: true, item: userId });
+      // this.setState({ isLoaded: true, item: userId });
     } catch (error) {
-      this.setState({ isLoaded: true, error: error });
+      // this.setState({ isLoaded: true, error: error });
       alert(error);
     }
   };
