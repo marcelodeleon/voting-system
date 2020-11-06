@@ -47,7 +47,7 @@ export default function LogIn() {
       });
 
       setSessionToken(token);
-      history.push('/Vote');
+      history.push('/');
     } catch (error) {
       alert(error);
     }
