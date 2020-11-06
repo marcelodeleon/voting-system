@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import UserRegistration from './components/users/UserRegistration';
+import ResultsPage from './components/users/ResultsPage';
 import Vote from './components/users/Vote';
 import Election from './components/admin/Election';
 import Home from './components/Home';
