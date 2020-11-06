@@ -1,4 +1,6 @@
 import React from 'react';
+import apiClient from '../../utils/api-client';
+import queryParams from 'query-params';
 
 class ResultsPage extends React.Component {
   constructor(props) {
@@ -6,18 +8,34 @@ class ResultsPage extends React.Component {
     this.state = {
       isLoaded: false,
       error: null,
-      cerrada: false,
-      idElection: 2,
-      resultado: {
-        proposals: {
-          title: {
-            agua: 3,
-            pepsi: 4,
-          },
-        },
+      electionId: null,
+      proposals: {
+        title: {},
       },
     };
   }
+
+  componentDidMount = async () => {
+    try {
+      //const result = await apiClient.get('getResultById');
+      const query = queryParams.decode(this.props.location.search.substring(1));
+      const { electionId } = query;
+      console.log({ electionId });
+      const result = await apiClient.get(
+        `getResultById?electionId=${electionId}`,
+      );
+
+      console.log(result);
+      this.setState({
+        isLoaded: true,
+        electionId: result[0].electionId,
+        proposals: result[0].proposals,
+      });
+    } catch (error) {
+      this.setState({ isLoaded: true });
+      alert(error.message);
+    }
+  };
 
   getMaxKey = (obj) => {
     let winner = '';
@@ -50,20 +68,32 @@ class ResultsPage extends React.Component {
   };
 
   render() {
-    return (
-      <div>
-        <h1>Resultados de la elección {this.state.resultado.idElection} </h1>
+    const { error, isLoaded } = this.state;
+    if (error) {
+      return <div>Error: {error.message}</div>;
+    } else if (!isLoaded) {
+      return <div>Loading...</div>;
+    } else {
+      return (
         <div>
-          <h2>De las opciones...</h2>
-          <p>
-            {' '}
-            El ganador es {this.getMaxKey(
-              this.state.resultado.proposals.title,
-            )}{' '}
-          </p>
+          {Object.keys(this.state.proposals).map((key) => (
+            <div>
+              <h2 key={key}> Resultados de la Propuesta: {key} </h2>
+              <h3 key>
+                El ganador es {this.getMaxKey(this.state.proposals[key])}
+              </h3>
+              {Object.keys(this.state.proposals[key]).map((key2) => (
+                <div>
+                  <h3 key={key2}>
+                    Opción: {key2} - Votos: {this.state.proposals[key][key2]}
+                  </h3>
+                </div>
+              ))}
+            </div>
+          ))}
         </div>
-      </div>
-    );
+      );
+    }
   }
 }
 
