@@ -1,7 +1,6 @@
 //require('dotenv').config();
 
 const sgMail = require('@sendgrid/mail');
-const { NODE_ENV } = process.env;
 
 //sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
@@ -11,11 +10,6 @@ function unixTimestamp(date) {
   }
   return Math.floor(date.getTime() / 1000.0);
 }
-
-const urlOrigin =
-  NODE_ENV === 'development'
-    ? 'http://localhost:8888/vote'
-    : 'https://voting-system-tas.netlify.app/vote';
 
 sgMail.setApiKey(
   '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',
@@ -35,7 +29,6 @@ function sendEmail(emailTo, subject, html, sendAt) {
     //   urlOrigin +
     //   '>aquí</a>',
     //the sendAt time is in UNIXTimestamp
-
     //https://www.epochconverter.com
     sendAt: unixTimestamp(sendAt),
   };
