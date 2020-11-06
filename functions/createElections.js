@@ -1,3 +1,4 @@
+const apiClient = require('../src/utils/api-client');
 const { Election } = require('../libs/models');
 const { Result } = require('../libs/models');
 const { mongodb } = require('../libs/connectors');
@@ -47,6 +48,10 @@ exports.handler = async (event, context, callback) => {
       '>aquí</a>',
     new Date(electionData.startAt),
   );
+
+  const user = await apiClient.get(`getUserByCountry?country=Uruguay`);
+
+  console.log(user);
 
   return callback(null, {
     statusCode: 200,
