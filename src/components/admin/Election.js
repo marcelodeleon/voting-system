@@ -11,6 +11,9 @@ export default function Election() {
   const history = useHistory();
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
+  const [city, setCity] = useState('');
+  const [states, setStates] = useState('');
+  const [age, setAge] = useState('');
   const [startAt, setStartAt] = useState(new Date());
   const [endAt, setEndAt] = useState(new Date());
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -51,6 +54,9 @@ export default function Election() {
             proposals: proposalsList,
             startAt,
             endAt,
+            city,
+            states,
+            age,
           },
         },
       });
@@ -96,6 +102,45 @@ export default function Election() {
             name="description"
             ref={register({ required: true })}
             onChange={(e) => setDescription(e.target.value)}
+          />
+          {errors.description && (
+            <span className="error">Campo requerido!</span>
+          )}
+        </label>
+        <label>
+          Ciudad:
+          <input
+            type="text"
+            value={city}
+            name="city"
+            ref={register({ required: true })}
+            onChange={(e) => setCity(e.target.value)}
+          />
+          {errors.description && (
+            <span className="error">Campo requerido!</span>
+          )}
+        </label>
+        <label>
+          Departamento:
+          <input
+            type="text"
+            value={states}
+            name="states"
+            ref={register({ required: true })}
+            onChange={(e) => setStates(e.target.value)}
+          />
+          {errors.description && (
+            <span className="error">Campo requerido!</span>
+          )}
+        </label>
+        <label>
+          Edad:
+          <input
+            type="text"
+            value={age}
+            name="age"
+            ref={register({ required: true })}
+            onChange={(e) => setAge(e.target.value)}
           />
           {errors.description && (
             <span className="error">Campo requerido!</span>
