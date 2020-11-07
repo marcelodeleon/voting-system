@@ -15,7 +15,7 @@ sgMail.setApiKey(
   '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',
 );
 
-function sendEmail(emailTo, subject, html, sendAt) {
+function sendEmail(emailTo, subject, html, sendAt = null) {
   msg = {
     to: emailTo,
     from: 'topicosavanzados2020.3@gmail.com',
@@ -23,8 +23,10 @@ function sendEmail(emailTo, subject, html, sendAt) {
     html: html,
     //the sendAt time is in UNIXTimestamp
     //https://www.epochconverter.com
-    sendAt: unixTimestamp(sendAt),
   };
+  if (sendAt) {
+    msg.sendAt = unixTimestamp(sendAt);
+  }
   sgMail
     .sendMultiple(msg)
     .then(() => {

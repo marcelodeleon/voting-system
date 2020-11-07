@@ -6,6 +6,7 @@ import ResultsPage from './components/users/ResultsPage';
 import Vote from './components/users/Vote';
 import Election from './components/admin/Election';
 import Home from './components/Home';
+import VerifyEmail from './components/users/VerifyEmail';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route exact path="/users/result" component={ResultsPage} />
         <Route exact path="/vote" component={Vote} />
         <Route exact path="/admin/election" component={Election} />
+        <Route exact path="/verify" component={VerifyEmail} />
       </Switch>
     </BrowserRouter>
   );
