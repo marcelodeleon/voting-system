@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
+const crypto = require('crypto');
 
 const { Schema } = mongoose;
 
@@ -39,6 +40,7 @@ const userSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  emailVerificationToken: String,
 });
 
 userSchema.methods.comparePassword = function comparePassword(password) {
@@ -54,7 +56,14 @@ async function hashPassword() {
 
   const salt = await bcrypt.genSalt(saltWorkFactor);
   user.password = await bcrypt.hash(user.password, salt);
+
+  if (user.emailVerificationToken) {
+    return;
+  }
+
+  user.emailVerificationToken = crypto.randomBytes(24).toString('hex');
 }
+
 userSchema.pre('save', hashPassword);
 
 const User = mongoose.model('User', userSchema);

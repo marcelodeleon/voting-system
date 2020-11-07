@@ -12,19 +12,21 @@ function unixTimestamp(date) {
 }
 
 sgMail.setApiKey(
-  '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',
+  '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',
 );
 
-function sendEmail(emailTo, subject, html, sendAt) {
+function sendEmail(emailTo, subject, html, sendAt = null) {
   msg = {
     to: emailTo,
-    from: 'topicosavanzados2020.2@gmail.com',
+    from: 'topicosavanzados2020.3@gmail.com',
     subject: subject,
     html: html,
     //the sendAt time is in UNIXTimestamp
     //https://www.epochconverter.com
-    sendAt: unixTimestamp(sendAt),
   };
+  if (sendAt) {
+    msg.sendAt = unixTimestamp(sendAt);
+  }
   sgMail
     .sendMultiple(msg)
     .then(() => {
