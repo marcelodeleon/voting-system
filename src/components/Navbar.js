@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import './styles/Navbar.css';
 import logo from './images/logo.svg';
+import { removeSessionToken } from '../utils/session';
 
 const StyledNavbar = styled.div`
   display: flex;
@@ -26,22 +27,31 @@ const Separator = styled.span`
   margin-right: 0.5rem;
 `;
 
-const isAdmin = () => window.localStorage.getItem('role') === 'admin';
-
 export default function Navbar() {
+  const history = useHistory();
+
+  const isAdmin = () => window.localStorage.getItem('role') === 'admin';
+
+  const logOut = () => {
+    removeSessionToken();
+    history.push('/');
+  };
+
   return (
     <StyledNavbar className="Navbar">
       <a className="Navbar__brand" href="/vote">
         <img className="Navbar__brand-logo" src={logo} alt="logo" />
       </a>
       <ActionsWrapper>
-        {!isAdmin() && (
+        {isAdmin() && (
           <React.Fragment>
             <StyledLink to={'/admin/election'}>Crear Elección</StyledLink>
             <Separator>|</Separator>
           </React.Fragment>
         )}
-        <StyledLink to={'#'}>Cerrar Sesión</StyledLink>
+        <StyledLink to={'#'} onClick={logOut}>
+          Cerrar Sesión
+        </StyledLink>
       </ActionsWrapper>
     </StyledNavbar>
   );
