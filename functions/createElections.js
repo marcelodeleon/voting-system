@@ -6,10 +6,15 @@ const sendEmail = require('../src/utils/sendEmail');
 const { NODE_ENV } = process.env;
 
 const mongodbUri = process.env.MONGODB_URI;
-const urlOrigin =
+const urlOriginStart =
   NODE_ENV === 'development'
     ? 'http://localhost:8888/vote?electionId='
     : 'https://voting-system-tas.netlify.app/vote?electionId=';
+
+const urlOriginEnd =
+  NODE_ENV === 'development'
+    ? 'http://localhost:8888/users/result?electionId='
+    : 'https://voting-system-tas.netlify.app/users/result?electionId=';
 
 exports.handler = async (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false;
@@ -55,10 +60,19 @@ exports.handler = async (event, context, callback) => {
       mails,
       'Comienza el periodo de votacion',
       '<strong>Comienza el período de votación, ingresa </strong><a href=' +
-        urlOrigin +
+        urlOriginStart +
         newElection.id +
         '>aquí</a>',
       new Date(electionData.startAt),
+    );
+    sendEmail(
+      mails,
+      'Resultados de elecciones',
+      '<strong>Ha finalizado el periodo de votacion, para ver los resultados ingresa </strong><a href=' +
+        urlOriginEnd +
+        newElection.id +
+        '>aquí</a>',
+      new Date(electionData.endAt),
     );
   }
 
