@@ -38,8 +38,15 @@ exports.handler = async (event, context, callback) => {
 
   const result = new Result(resultData);
   await result.save();
-  //const users2 = await User.find({ age: { $gte: ri, $lte: rf }, city, department});
-  const users = await User.find({ country: 'Uruguay' });
+
+  const ages = newElection.age.split('-');
+  const ri = ages[0];
+  const rf = ages[1];
+  const users = await User.find({
+    age: { $gte: ri, $lte: rf },
+    city: 'Montevideo',
+    department: 'Montevideo',
+  });
   const mails = users.map((user) => user.email);
   console.log(mails);
 

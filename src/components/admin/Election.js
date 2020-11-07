@@ -136,11 +136,12 @@ export default function Election() {
           )}
         </label>
         <label>
-          Edad:
+          Edades:
           <input
             type="text"
             value={age}
             name="age"
+            placeholder="Ejemplo: 18-55"
             ref={register({ required: true })}
             onChange={(e) => setAge(e.target.value)}
           />
