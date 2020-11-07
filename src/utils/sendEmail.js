@@ -12,13 +12,13 @@ function unixTimestamp(date) {
 }
 
 sgMail.setApiKey(
-  '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',
+  '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',
 );
 
 function sendEmail(emailTo, subject, html, sendAt = null) {
   msg = {
     to: emailTo,
-    from: 'topicosavanzados2020.3@gmail.com',
+    from: 'fdralberti@gmail.com',
     subject: subject,
     html: html,
     //the sendAt time is in UNIXTimestamp
