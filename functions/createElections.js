@@ -8,13 +8,13 @@ const { NODE_ENV } = process.env;
 const mongodbUri = process.env.MONGODB_URI;
 const urlOriginStart =
   NODE_ENV === 'development'
-    ? 'http://localhost:8888/vote?electionId='
-    : 'https://voting-system-tas.netlify.app/vote?electionId=';
+    ? 'https://voting-system-tas.netlify.app/vote?electionId='
+    : 'http://localhost:8888/vote?electionId=';
 
 const urlOriginEnd =
   NODE_ENV === 'development'
-    ? 'http://localhost:8888/users/result?electionId='
-    : 'https://voting-system-tas.netlify.app/users/result?electionId=';
+    ? 'https://voting-system-tas.netlify.app/users/result?electionId='
+    : 'http://localhost:8888/users/result?electionId=';
 
 exports.handler = async (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false;
