@@ -1,6 +1,6 @@
-const apiClient = require('../src/utils/api-client');
 const { Election } = require('../libs/models');
 const { Result } = require('../libs/models');
+const { User } = require('../libs/models');
 const { mongodb } = require('../libs/connectors');
 const sendEmail = require('../src/utils/sendEmail');
 const { NODE_ENV } = process.env;
@@ -38,9 +38,13 @@ exports.handler = async (event, context, callback) => {
 
   const result = new Result(resultData);
   await result.save();
+  //const users2 = await User.find({ age: { $gte: ri, $lte: rf }, city, department});
+  const users = await User.find({ country: 'Uruguay' });
+  const mails = users.map((user) => user.email);
+  console.log(mails);
 
   sendEmail(
-    ['gonzalogg.garcia@gmail.com', 'marcebattlenet@gmail.com'],
+    mails,
     'Comienza el periodo de votacion',
     '<strong>Comienza el período de votación, ingresa </strong><a href=' +
       urlOrigin +
@@ -48,10 +52,6 @@ exports.handler = async (event, context, callback) => {
       '>aquí</a>',
     new Date(electionData.startAt),
   );
-
-  const user = await apiClient.get(`getUserByCountry?country=Uruguay`);
-
-  console.log(user);
 
   return callback(null, {
     statusCode: 200,

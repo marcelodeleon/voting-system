@@ -13,9 +13,9 @@ const electionSchema = new mongoose.Schema(
     },
     startAt: { type: Date, required: true },
     endAt: { type: Date, required: true },
-    //city: { type: String, required: true },
-    //states: { type: String, required: true },
-    //age: { type: String, required: true },
+    city: { type: String, required: true },
+    states: { type: String, required: true },
+    age: { type: String, required: true },
   },
   { timestamps: true },
 );

@@ -41,6 +41,8 @@ export default function Election() {
 
   const onSubmit = async () => {
     try {
+      if (proposalsList.length === 0)
+        return alert('No se puede crear una eleccion sin propuestas');
       await apiClient.post('createElections', {
         body: {
           electionData: {
@@ -117,7 +119,7 @@ export default function Election() {
             sendProposals={loadProposals}
           />
         )}
-        <button className={'form-component'} onClick={openModal}>
+        <button className={'form-component'} type="button" onClick={openModal}>
           Crear Propuestas
         </button>
         <input className={'form-component'} type="submit" value="Submit" />
