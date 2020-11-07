@@ -3,7 +3,9 @@ const { mongodb } = require('../libs/connectors');
 
 const mongodbUri = process.env.MONGODB_URI;
 
-exports.handler = async (event) => {
+exports.handler = async (event, context) => {
+  context.callbackWaitsForEmptyEventLoop = false;
+
   await mongodb(mongodbUri);
   const { body } = event;
 

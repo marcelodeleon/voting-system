@@ -65,9 +65,7 @@
   font-family: Arial Black;
 }
 
-input:not([type=radio]) {
-  margin-right: 1rem;
-  width: 30rem;
+input:not([type=radio]):not([type=submit]) {
   height: 1.5rem;
 }
 
@@ -87,4 +85,12 @@ label {
 input[type="submit"] {
   margin-top: 2rem;
   cursor: pointer;
+}
+
+a {
+  font-size: 1rem;
+  text-decoration: underline;
+  color: #617af6;
+  cursor: pointer;
+  margin-top: 1rem;
 }

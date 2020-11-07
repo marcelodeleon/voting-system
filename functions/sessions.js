@@ -6,13 +6,16 @@ const { mongodb } = require('../libs/connectors');
 const jwtSecret = process.env.JWT_SECRET;
 const mongodbUri = process.env.MONGODB_URI;
 
-exports.handler = async (event) => {
+exports.handler = async (event, context) => {
+  context.callbackWaitsForEmptyEventLoop = false;
+
   await mongodb(mongodbUri);
   const { body } = event;
 
   const { email, password } = JSON.parse(body);
 
   const foundUser = await User.findOne({ email });
+
   if (!foundUser || !(await foundUser.comparePassword(password))) {
     return {
       statusCode: 401,

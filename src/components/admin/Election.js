@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import ModalProposal from './ModalProposal';
 import apiClient from '../../utils/api-client';
 import '../styles/Election.css';
 
 export default function Election() {
+  const { register, handleSubmit, errors } = useForm();
+  const history = useHistory();
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [startAt, setStartAt] = useState(new Date());
@@ -35,8 +39,7 @@ export default function Election() {
     loadProposalsObj(proposalsList);
   };
 
-  const handleSubmit = async (evt) => {
-    evt.preventDefault();
+  const onSubmit = async () => {
     try {
       await apiClient.post('createElections', {
         body: {
@@ -49,6 +52,7 @@ export default function Election() {
           },
         },
       });
+      history.push('/');
     } catch (error) {
       alert(error.message);
     }
@@ -70,22 +74,30 @@ export default function Election() {
   return (
     <div>
       <h1 className="election-title">Nueva Eleccion</h1>
-      <form className="election-form" onSubmit={handleSubmit}>
+      <form className="election-form" onSubmit={handleSubmit(onSubmit)}>
         <label>
           Nombre:
           <input
             type="text"
             value={name}
+            name="name"
+            ref={register({ required: true })}
             onChange={(e) => setName(e.target.value)}
           />
+          {errors.name && <span className="error">Campo requerido!</span>}
         </label>
         <label>
           Descripcion:
           <input
             type="text"
             value={description}
+            name="description"
+            ref={register({ required: true })}
             onChange={(e) => setDescription(e.target.value)}
           />
+          {errors.description && (
+            <span className="error">Campo requerido!</span>
+          )}
         </label>
         <label>
           Fecha Inicio:

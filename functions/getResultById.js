@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
-const { Election } = require('../libs/models');
+const { Result } = require('../libs/models');
 const { mongodb } = require('../libs/connectors');
-const withAuth = require('./middleware/auth');
 
 const { Types } = mongoose;
+
 const mongodbUri = process.env.MONGODB_URI;
 
-const getElectionsById = async (event, context) => {
+exports.handler = async (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false;
 
   const { electionId } = event.queryStringParameters;
@@ -14,24 +14,21 @@ const getElectionsById = async (event, context) => {
   await mongodb(mongodbUri);
 
   try {
-    const election = await Election.findOne({
-      _id: Types.ObjectId(electionId),
+    const result = await Result.find({
+      electionId: Types.ObjectId(electionId),
     });
 
-    return {
+    return callback(null, {
       statusCode: 200,
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(election),
-    };
+      body: JSON.stringify(result),
+    });
   } catch (error) {
-    return {
+    return callback(null, {
       statusCode: 404,
       body: JSON.stringify({ error: 'No existe esa eleccion' }),
-    };
+    });
   }
 };
-
-exports.handler = (event, context) =>
-  withAuth(getElectionsById)(event, context);
