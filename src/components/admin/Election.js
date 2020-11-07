@@ -12,6 +12,9 @@ export default function Election() {
   const history = useHistory();
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
+  const [city, setCity] = useState('');
+  const [states, setStates] = useState('');
+  const [age, setAge] = useState('');
   const [startAt, setStartAt] = useState(new Date());
   const [endAt, setEndAt] = useState(new Date());
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -42,6 +45,8 @@ export default function Election() {
 
   const onSubmit = async () => {
     try {
+      if (proposalsList.length === 0)
+        return alert('No se puede crear una eleccion sin propuestas');
       await apiClient.post('createElections', {
         body: {
           electionData: {
@@ -50,6 +55,9 @@ export default function Election() {
             proposals: proposalsList,
             startAt,
             endAt,
+            city,
+            states,
+            age,
           },
         },
       });
@@ -102,6 +110,45 @@ export default function Election() {
           )}
         </label>
         <label>
+          Ciudad:
+          <input
+            type="text"
+            value={city}
+            name="city"
+            ref={register({ required: true })}
+            onChange={(e) => setCity(e.target.value)}
+          />
+          {errors.description && (
+            <span className="error">Campo requerido!</span>
+          )}
+        </label>
+        <label>
+          Departamento:
+          <input
+            type="text"
+            value={states}
+            name="states"
+            ref={register({ required: true })}
+            onChange={(e) => setStates(e.target.value)}
+          />
+          {errors.description && (
+            <span className="error">Campo requerido!</span>
+          )}
+        </label>
+        <label>
+          Edad:
+          <input
+            type="text"
+            value={age}
+            name="age"
+            ref={register({ required: true })}
+            onChange={(e) => setAge(e.target.value)}
+          />
+          {errors.description && (
+            <span className="error">Campo requerido!</span>
+          )}
+        </label>
+        <label>
           Fecha Inicio:
           <DatePicker
             selected={startAt}
@@ -119,7 +166,7 @@ export default function Election() {
             sendProposals={loadProposals}
           />
         )}
-        <button className={'form-component'} onClick={openModal}>
+        <button className={'form-component'} type="button" onClick={openModal}>
           Crear Propuestas
         </button>
         <input className={'form-component'} type="submit" value="Submit" />

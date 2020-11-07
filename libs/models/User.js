@@ -40,12 +40,24 @@ const userSchema = new Schema({
     type: Boolean,
     default: false,
   },
-  emailVerificationToken: String,
+  age: {
+    type: Number,
+    required: false,
+  },
 });
 
 userSchema.methods.comparePassword = function comparePassword(password) {
   return bcrypt.compare(password, this.password);
 };
+
+function calculate_age(dob) {
+  var diff_ms = Date.now() - dob.getTime();
+  var age_dt = new Date(diff_ms);
+
+  return Math.abs(age_dt.getUTCFullYear() - 1970);
+}
+
+console.log(calculate_age(new Date()));
 
 async function hashPassword() {
   const user = this;
@@ -56,6 +68,7 @@ async function hashPassword() {
 
   const salt = await bcrypt.genSalt(saltWorkFactor);
   user.password = await bcrypt.hash(user.password, salt);
+  user.age = await calculate_age(this.dateOfBirth);
 
   if (user.emailVerificationToken) {
     return;
