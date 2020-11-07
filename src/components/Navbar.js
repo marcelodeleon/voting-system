@@ -4,6 +4,7 @@ import { Link, useHistory } from 'react-router-dom';
 import './styles/Navbar.css';
 import logo from './images/logo.svg';
 import { removeSessionToken } from '../utils/session';
+import { isAuthenticated } from '../utils/auth';
 
 const StyledNavbar = styled.div`
   display: flex;
@@ -42,17 +43,19 @@ export default function Navbar() {
       <a className="Navbar__brand" href="/vote">
         <img className="Navbar__brand-logo" src={logo} alt="logo" />
       </a>
-      <ActionsWrapper>
-        {isAdmin() && (
-          <React.Fragment>
-            <StyledLink to={'/admin/election'}>Crear Elección</StyledLink>
-            <Separator>|</Separator>
-          </React.Fragment>
-        )}
-        <StyledLink to={'#'} onClick={logOut}>
-          Cerrar Sesión
-        </StyledLink>
-      </ActionsWrapper>
+      {isAuthenticated() && (
+        <ActionsWrapper>
+          {isAdmin() && (
+            <React.Fragment>
+              <StyledLink to={'/admin/election'}>Crear Elección</StyledLink>
+              <Separator>|</Separator>
+            </React.Fragment>
+          )}
+          <StyledLink to={'#'} onClick={logOut}>
+            Cerrar Sesión
+          </StyledLink>
+        </ActionsWrapper>
+      )}
     </StyledNavbar>
   );
 }
