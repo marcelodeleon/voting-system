@@ -40,13 +40,10 @@ class VerifyEmail extends React.Component {
     try {
       const query = queryParams.decode(this.props.location.search.substring(1));
       const { userId, tokenId } = query;
-      console.log(userId);
-      console.log(tokenId);
 
       const validated = await apiClient.get(
         `validateEmail?userId=${userId}&tokenId=${tokenId}`,
       );
-      console.log(validated);
 
       // this.setState({ isLoaded: true, item: userId });
     } catch (error) {

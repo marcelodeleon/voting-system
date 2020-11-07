@@ -16,8 +16,6 @@ exports.handler = async (event, context, callback) => {
     const user = await User.findOne({
       _id: Types.ObjectId(userId),
     });
-    console.log(user);
-
     if (user.emailVerificationToken !== tokenId) {
       return callback(null, {
         statusCode: 404,
@@ -25,14 +23,15 @@ exports.handler = async (event, context, callback) => {
       });
     }
 
-    // console.log(event.body);
+    user.emailVerified = true;
+    user.save();
 
     return callback(null, {
       statusCode: 200,
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ fruta: 'fruta' }),
+      body: JSON.stringify({ success: true }),
     });
   } catch (error) {
     return callback(null, {
