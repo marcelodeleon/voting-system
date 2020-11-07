@@ -33,6 +33,6 @@ exports.handler = async (event, context) => {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ token }),
+    body: JSON.stringify({ token, role: foundUser.role }),
   };
 };
