@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import ModalProposal from './ModalProposal';
+import Navbar from '../Navbar';
 import apiClient from '../../utils/api-client';
 import '../styles/Election.css';
 
@@ -73,6 +74,7 @@ export default function Election() {
 
   return (
     <div>
+      <Navbar />
       <h1 className="election-title">Nueva Eleccion</h1>
       <form className="election-form" onSubmit={handleSubmit(onSubmit)}>
         <label>

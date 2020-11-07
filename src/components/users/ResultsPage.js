@@ -1,6 +1,7 @@
 import React from 'react';
 import apiClient from '../../utils/api-client';
 import queryParams from 'query-params';
+import Navbar from '../Navbar';
 
 class ResultsPage extends React.Component {
   constructor(props) {
@@ -75,23 +76,26 @@ class ResultsPage extends React.Component {
       return <div>Loading...</div>;
     } else {
       return (
-        <div>
-          {Object.keys(this.state.proposals).map((key) => (
-            <div>
-              <h2 key={key}> Resultados de la Propuesta: {key} </h2>
-              <h3 key>
-                El ganador es {this.getMaxKey(this.state.proposals[key])}
-              </h3>
-              {Object.keys(this.state.proposals[key]).map((key2) => (
-                <div>
-                  <h3 key={key2}>
-                    Opción: {key2} - Votos: {this.state.proposals[key][key2]}
-                  </h3>
-                </div>
-              ))}
-            </div>
-          ))}
-        </div>
+        <React.Fragment>
+          <Navbar />
+          <div>
+            {Object.keys(this.state.proposals).map((key) => (
+              <div>
+                <h2 key={key}> Resultados de la Propuesta: {key} </h2>
+                <h3 key>
+                  El ganador es {this.getMaxKey(this.state.proposals[key])}
+                </h3>
+                {Object.keys(this.state.proposals[key]).map((key2) => (
+                  <div>
+                    <h3 key={key2}>
+                      Opción: {key2} - Votos: {this.state.proposals[key][key2]}
+                    </h3>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        </React.Fragment>
       );
     }
   }
