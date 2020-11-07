@@ -46,7 +46,7 @@ export default function LogIn() {
 
   const onSubmit = async () => {
     try {
-      const { token } = await apiClient.post('sessions', {
+      const { token, role } = await apiClient.post('sessions', {
         body: {
           email,
           password,
@@ -54,6 +54,7 @@ export default function LogIn() {
       });
 
       setSessionToken(token);
+      window.localStorage.setItem('role', role);
       history.push('/');
     } catch (error) {
       alert(error);
