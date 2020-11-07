@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import DatePicker from 'react-datepicker';
 import apiClient from '../../utils/api-client';
 import Navbar from '../Navbar';
 
