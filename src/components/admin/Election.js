@@ -149,6 +149,7 @@ export default function Election() {
           Fecha y Hora de Inicio:
           <DatePicker
             selected={startAt}
+            minDate={new Date()}
             onChange={(date) => setStartAt(date)}
             showTimeSelect
             timeFormat="HH:mm"
@@ -160,6 +161,7 @@ export default function Election() {
           Fecha y Hora de Fin:
           <DatePicker
             selected={endAt}
+            minDate={new Date()}
             onChange={(date) => setEndAt(date)}
             showTimeSelect
             timeFormat="HH:mm"
