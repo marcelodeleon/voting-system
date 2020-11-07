@@ -2,10 +2,18 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
+import styled from 'styled-components';
 import ModalProposal from './ModalProposal';
 import Navbar from '../Navbar';
 import apiClient from '../../utils/api-client';
 import '../styles/Election.css';
+
+const ProposalsButton = styled.button`
+  display: block;
+  width: 20rem;
+  margin: auto;
+  color: teal;
+`;
 
 export default function Election() {
   const { register, handleSubmit, errors } = useForm();
@@ -115,12 +123,8 @@ export default function Election() {
             type="text"
             value={city}
             name="city"
-            ref={register({ required: true })}
             onChange={(e) => setCity(e.target.value)}
           />
-          {errors.description && (
-            <span className="error">Campo requerido!</span>
-          )}
         </label>
         <label>
           Departamento:
@@ -128,12 +132,8 @@ export default function Election() {
             type="text"
             value={states}
             name="states"
-            ref={register({ required: true })}
             onChange={(e) => setStates(e.target.value)}
           />
-          {errors.description && (
-            <span className="error">Campo requerido!</span>
-          )}
         </label>
         <label>
           Edades:
@@ -142,23 +142,32 @@ export default function Election() {
             value={age}
             name="age"
             placeholder="Ejemplo: 18-55"
-            ref={register({ required: true })}
             onChange={(e) => setAge(e.target.value)}
           />
-          {errors.description && (
-            <span className="error">Campo requerido!</span>
-          )}
         </label>
         <label>
-          Fecha Inicio:
+          Fecha y Hora de Inicio:
           <DatePicker
             selected={startAt}
+            minDate={new Date()}
             onChange={(date) => setStartAt(date)}
+            showTimeSelect
+            timeFormat="HH:mm"
+            dateFormat="dd/MM/yyyy HH:mm"
+            timeIntervals={15}
           />
         </label>
         <label>
-          Fecha Fin:
-          <DatePicker selected={endAt} onChange={(date) => setEndAt(date)} />
+          Fecha y Hora de Fin:
+          <DatePicker
+            selected={endAt}
+            minDate={new Date()}
+            onChange={(date) => setEndAt(date)}
+            showTimeSelect
+            timeFormat="HH:mm"
+            dateFormat="dd/MM/yyyy HH:mm"
+            timeIntervals={15}
+          />
         </label>
         {isOpenModal && (
           <ModalProposal
@@ -167,9 +176,9 @@ export default function Election() {
             sendProposals={loadProposals}
           />
         )}
-        <button className={'form-component'} type="button" onClick={openModal}>
+        <ProposalsButton className={'form-component'} type="button" onClick={openModal}>
           Crear Propuestas
-        </button>
+        </ProposalsButton>
         <input className={'form-component'} type="submit" value="Submit" />
       </form>
     </div>
