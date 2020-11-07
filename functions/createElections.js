@@ -44,21 +44,23 @@ exports.handler = async (event, context, callback) => {
   const rf = ages[1];
   const users = await User.find({
     age: { $gte: ri, $lte: rf },
-    city: 'Montevideo',
-    department: 'Montevideo',
+    city: newElection.city,
+    department: newElection.states,
   });
   const mails = users.map((user) => user.email);
   console.log(mails);
 
-  sendEmail(
-    mails,
-    'Comienza el periodo de votacion',
-    '<strong>Comienza el período de votación, ingresa </strong><a href=' +
-      urlOrigin +
-      newElection.id +
-      '>aquí</a>',
-    new Date(electionData.startAt),
-  );
+  if (mails.length > 0) {
+    sendEmail(
+      mails,
+      'Comienza el periodo de votacion',
+      '<strong>Comienza el período de votación, ingresa </strong><a href=' +
+        urlOrigin +
+        newElection.id +
+        '>aquí</a>',
+      new Date(electionData.startAt),
+    );
+  }
 
   return callback(null, {
     statusCode: 200,
