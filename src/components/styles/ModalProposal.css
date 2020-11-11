@@ -7,8 +7,8 @@
     background-color: rgba(255, 255, 255, 0.75)
   }
   .modal {
-    font-size: 20px;
-    color: rgb(0, 28, 104);
+    font-size: 16px;
+    color: white(0, 28, 104);
     font-family: Arial Black;
     position: absolute;
     top: 130px;
@@ -19,11 +19,23 @@
     background: #fff;
     overflow: auto;
     text-align: center;
-    background-color: rgba(161, 213, 255, 0.87)
+    background-color: teal
   }
   .my-form {
     text-align:auto;
     font-size: 20px;
     font-family: Arial Black;
   }
+
+  .form-button {
+    margin-top: 1rem !important;
+    background: white;
+    color: teal  !important;
+    font: inherit;
+    border: 1.5px solid #0e4f1f;
+    padding: 0.5rem;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
   

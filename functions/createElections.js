@@ -6,11 +6,15 @@ const sendEmail = require('../src/utils/sendEmail');
 const { NODE_ENV } = process.env;
 
 const mongodbUri = process.env.MONGODB_URI;
-
-const urlOriginStart = 'https://voting-system-tas.netlify.app/vote?electionId=';
+const urlOriginStart =
+  NODE_ENV === 'development'
+    ? 'http://localhost:8888/vote?electionId='
+    : 'https://voting-system-tas.netlify.app/vote?electionId=';
 
 const urlOriginEnd =
-  'https://voting-system-tas.netlify.app/users/result?electionId=';
+  NODE_ENV === 'development'
+    ? 'http://localhost:8888/users/result?electionId='
+    : 'https://voting-system-tas.netlify.app/users/result?electionId=';
 
 exports.handler = async (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false;
