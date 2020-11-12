@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
-import { useHistory, Link } from 'react-router-dom';
 import apiClient from '../../utils/api-client';
 
 import queryParams from 'query-params';
