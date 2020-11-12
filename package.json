@@ -20,6 +20,7 @@
     "dotenv": "^8.2.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.8",
+    "mutationobserver-shim": "^0.3.7",
     "query-params": "^0.0.1",
     "react": "^16.13.1",
     "react-datepicker": "^3.2.2",
