@@ -7,6 +7,8 @@ import Vote from './components/users/Vote';
 import Election from './components/admin/Election';
 import Home from './components/Home';
 import VerifyEmail from './components/users/VerifyEmail';
+import ResetPassword from './components/users/ResetPassword';
+import NewPassword from './components/users/NewPassword';
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
         <Route exact path="/vote" component={Vote} />
         <Route exact path="/admin/election" component={Election} />
         <Route exact path="/verify" component={VerifyEmail} />
+        <Route exact path="/reset" component={ResetPassword} />
+        <Route exact path="/newpass" component={NewPassword} />
       </Switch>
     </BrowserRouter>
   );

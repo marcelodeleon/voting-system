@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
-import { useHistory, Link } from 'react-router-dom';
 import apiClient from '../../utils/api-client';
-import { setSessionToken } from '../../utils/session';
 
-const LogInForm = styled.form`
+import queryParams from 'query-params';
+
+const ForgotPasswordForm = styled.form`
   font-size: 1.5em;
   text-align: center;
   color: teal;
@@ -38,47 +38,31 @@ const inputStyle = {
   width: '30rem',
 };
 
-export default function LogIn() {
+export default function NewPassword() {
   const { register, handleSubmit, errors } = useForm();
-  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const history = useHistory();
 
   const onSubmit = async () => {
     try {
-      const { token, role } = await apiClient.post('sessions', {
+      const query = queryParams.decode(this.props.location.search.substring(1));
+      const { userId } = query;
+      await apiClient.post('confirmPassword', {
         body: {
-          email,
+          userId,
           password,
         },
       });
-
-      setSessionToken(token);
-      window.localStorage.setItem('role', role);
-      history.push('/');
     } catch (error) {
       alert(error);
     }
   };
 
   return (
-    <LogInForm onSubmit={handleSubmit(onSubmit)}>
-      <h1>Login</h1>
+    <ForgotPasswordForm onSubmit={handleSubmit(onSubmit)}>
+      <h1>Reset Password</h1>
       <LogInFields>
         <label>
-          Email:
-          <input
-            style={inputStyle}
-            type="email"
-            name="email"
-            ref={register({ required: true })}
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          {errors.email && <span className="error">Campo requerido!</span>}
-        </label>
-        <label>
-          Password:
+          New Password:
           <input
             style={inputStyle}
             type="password"
@@ -96,12 +80,8 @@ export default function LogIn() {
             </span>
           )}
         </label>
-        <SubmitInput type="submit" value="Log In" />
-        <Link to={'/users/registration'}>
-          ¿No tienes cuenta? Click aquí para registrar un usuario
-        </Link>
-        <Link to={'/reset'}>Recuperar contraseña.</Link>
+        <SubmitInput type="submit" value="Set New Password" />
       </LogInFields>
-    </LogInForm>
+    </ForgotPasswordForm>
   );
 }

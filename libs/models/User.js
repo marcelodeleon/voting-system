@@ -40,6 +40,8 @@ const userSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  emailVerificationToken: String,
+  passwordResetToken: String,
   age: {
     type: Number,
     required: false,
