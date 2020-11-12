@@ -76,7 +76,7 @@ exports[`Election Renders Election correctly 1`] = `
           <input
             class=""
             type="text"
-            value="12/11/2020 01:40"
+            value="12/11/2020 17:07"
           />
         </div>
       </div>
@@ -92,7 +92,7 @@ exports[`Election Renders Election correctly 1`] = `
           <input
             class=""
             type="text"
-            value="12/11/2020 01:40"
+            value="12/11/2020 17:07"
           />
         </div>
       </div>
