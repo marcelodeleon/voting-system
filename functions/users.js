@@ -7,8 +7,8 @@ const { NODE_ENV } = process.env;
 
 const urlOrigin =
   NODE_ENV === 'development'
-    ? 'https://voting-system-tas.netlify.app/verify?userId='
-    : 'http://localhost:8888/verify?userId=';
+    ? 'http://localhost:8888/verify?userId='
+    : 'https://voting-system-tas.netlify.app/verify?userId=';
 
 exports.handler = async (event, context) => {
   context.callbackWaitsForEmptyEventLoop = false;

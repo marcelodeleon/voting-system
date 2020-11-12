@@ -105,7 +105,9 @@ class ModalProposal extends React.Component {
             <div>
               <label>Para finalizar, presiona Agregar</label>
             </div>
-            <button onClick={this.handleNewProposal}>Agregar</button>
+            <button className={'form-button'} onClick={this.handleNewProposal}>
+              Agregar
+            </button>
             <div>
               <label>
                 ¡Puedes repetir los pasos (1 y luego 2) para tener muchas
@@ -115,8 +117,15 @@ class ModalProposal extends React.Component {
               </label>
             </div>
             <div>
-              <button onClick={this.handleSubmit}>Terminar</button>
-              <button onClick={this.props.cancelModal}>Cancelar</button>
+              <button className={'form-button'} onClick={this.handleSubmit}>
+                Terminar
+              </button>
+              <button
+                className={'form-button'}
+                onClick={this.props.cancelModal}
+              >
+                Cancelar
+              </button>
             </div>
           </form>
         </div>
