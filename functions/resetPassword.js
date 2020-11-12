@@ -1,10 +1,11 @@
+const crypto = require('crypto');
+
 const { User } = require('../libs/models');
 const { mongodb } = require('../libs/connectors');
 
 const mongodbUri = process.env.MONGODB_URI;
-const crypto = require('crypto');
-
 const sendEmail = require('../src/utils/sendEmail');
+
 const { NODE_ENV } = process.env;
 
 const urlOrigin =

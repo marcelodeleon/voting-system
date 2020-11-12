@@ -46,7 +46,7 @@ export default function NewPassword() {
   const onSubmit = async () => {
     try {
       const query = queryParams.decode(this.props.location.search.substring(1));
-      const { userId, tokenId } = query;
+      const { userId } = query;
       await apiClient.post('confirmPassword', {
         body: {
           userId,
