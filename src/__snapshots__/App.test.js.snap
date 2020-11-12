@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders App correctly 1`] = `
+<div>
+  <form
+    class="sc-jrAGrp wPOmF"
+  >
+    <h1>
+      Login
+    </h1>
+    <div
+      class="sc-kEjbxe jtAWeG"
+    >
+      <label>
+        Email:
+        <input
+          name="email"
+          style="width: 30rem;"
+          type="email"
+          value=""
+        />
+      </label>
+      <label>
+        Password:
+        <input
+          name="password"
+          style="width: 30rem;"
+          type="password"
+          value=""
+        />
+      </label>
+      <input
+        class="sc-iqHYGH knFwIE"
+        type="submit"
+        value="Log In"
+      />
+      <a
+        href="/users/registration"
+      >
+        ¿No tienes cuenta? Click aquí para registrar un usuario
+      </a>
+    </div>
+  </form>
+</div>
+`;

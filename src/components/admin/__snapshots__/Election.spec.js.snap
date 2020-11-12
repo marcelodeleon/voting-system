@@ -1,0 +1,113 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Election Renders Election correctly 1`] = `
+<div>
+  <div
+    class="sc-bdfBwQ bWIvum Navbar"
+  >
+    <a
+      class="Navbar__brand"
+      href="/vote"
+    >
+      <img
+        alt="logo"
+        class="Navbar__brand-logo"
+        src="logo.svg"
+      />
+    </a>
+  </div>
+  <h1
+    class="election-title"
+  >
+    Nueva Eleccion
+  </h1>
+  <form
+    class="election-form"
+  >
+    <label>
+      Nombre:
+      <input
+        name="name"
+        type="text"
+        value=""
+      />
+    </label>
+    <label>
+      Descripcion:
+      <input
+        name="description"
+        type="text"
+        value=""
+      />
+    </label>
+    <label>
+      Ciudad:
+      <input
+        name="city"
+        type="text"
+        value=""
+      />
+    </label>
+    <label>
+      Departamento:
+      <input
+        name="states"
+        type="text"
+        value=""
+      />
+    </label>
+    <label>
+      Edades:
+      <input
+        name="age"
+        placeholder="Ejemplo: 18-55"
+        type="text"
+        value=""
+      />
+    </label>
+    <label>
+      Fecha y Hora de Inicio:
+      <div
+        class="react-datepicker-wrapper"
+      >
+        <div
+          class="react-datepicker__input-container"
+        >
+          <input
+            class=""
+            type="text"
+            value="12/11/2020 01:40"
+          />
+        </div>
+      </div>
+    </label>
+    <label>
+      Fecha y Hora de Fin:
+      <div
+        class="react-datepicker-wrapper"
+      >
+        <div
+          class="react-datepicker__input-container"
+        >
+          <input
+            class=""
+            type="text"
+            value="12/11/2020 01:40"
+          />
+        </div>
+      </div>
+    </label>
+    <button
+      class="sc-eCssSg gJtyAZ form-component"
+      type="button"
+    >
+      Crear Propuestas
+    </button>
+    <input
+      class="form-component"
+      type="submit"
+      value="Submit"
+    />
+  </form>
+</div>
+`;

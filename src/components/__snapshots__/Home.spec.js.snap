@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home Renders LogIn screen if user is not authenticated 1`] = `
+<div>
+  <form
+    class="sc-bdfBwQ eYhSFl"
+  >
+    <h1>
+      Login
+    </h1>
+    <div
+      class="sc-gsTCUz kXIVEF"
+    >
+      <label>
+        Email:
+        <input
+          name="email"
+          style="width: 30rem;"
+          type="email"
+          value=""
+        />
+      </label>
+      <label>
+        Password:
+        <input
+          name="password"
+          style="width: 30rem;"
+          type="password"
+          value=""
+        />
+      </label>
+      <input
+        class="sc-dlfnbm WzKeF"
+        type="submit"
+        value="Log In"
+      />
+      <a
+        href="/users/registration"
+      >
+        ¿No tienes cuenta? Click aquí para registrar un usuario
+      </a>
+    </div>
+  </form>
+</div>
+`;
+
+exports[`Home Renders Welcome screen if user authenticated correctly 1`] = `
+<div>
+  <div
+    class="sc-iBPRYJ kEDcat"
+  >
+    <div
+      class="sc-hKgILt bwBfkL Navbar"
+    >
+      <a
+        class="Navbar__brand"
+        href="/vote"
+      >
+        <img
+          alt="logo"
+          class="Navbar__brand-logo"
+          src="logo.svg"
+        />
+      </a>
+      <div
+        class="sc-jSgupP ePKIeF"
+      >
+        <a
+          class="sc-eCssSg cACQva"
+          href="/"
+        >
+          Cerrar Sesión
+        </a>
+      </div>
+    </div>
+    <h1>
+      Bienvenido al Sistema de Votación!
+    </h1>
+    <p>
+      Recibirá un email con las votaciones a las que pueda participar en cuanto estén listas.
+    </p>
+    <p>
+      Los links de votación son de un único uso y deberá haber iniciado sesión en la aplicación.
+    </p>
+  </div>
+</div>
+`;
